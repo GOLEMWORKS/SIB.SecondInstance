@@ -31,16 +31,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Owner", policy => policy.RequireRole("Owner"));
-    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
-    options.AddPolicy("Moderator", policy => policy.RequireRole("Moderator"));
-    options.AddPolicy("Creator", policy => policy.RequireRole("Creator"));
+    options.AddPolicy("OwnerPolicy", policy => policy.RequireRole("Owner"));
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("ModeratorPolicy", policy => policy.RequireRole("Moderator"));
+    options.AddPolicy("CreatorPolicy", policy => policy.RequireRole("Creator"));
 });
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
