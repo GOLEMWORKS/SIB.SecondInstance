@@ -37,6 +37,7 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
 
 builder.Services.AddAuthorization(options =>
 {
+    options.AddPolicy("Owner", policy => policy.RequireRole("Owner"));
     options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
     options.AddPolicy("Moderator", policy => policy.RequireRole("Moderator"));
     options.AddPolicy("Creator", policy => policy.RequireRole("Creator"));
