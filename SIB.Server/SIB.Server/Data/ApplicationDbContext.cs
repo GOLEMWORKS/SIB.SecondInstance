@@ -12,6 +12,7 @@ namespace SIB.Server.Data
             base.OnModelCreating(builder);
             this.SeedRoles(builder);
             this.SeedOwner(builder);
+            this.SeedOwnerRights(builder);
         }
 
         private void SeedRoles(ModelBuilder builder)
@@ -41,13 +42,26 @@ namespace SIB.Server.Data
                         PasswordHash = hasher.HashPassword(null, "OURPASSWORD")
                     }
             );
+        }
 
-            builder.Entity<IdentityUserRole<string>>().HasData(
-            new IdentityUserRole<string>
-            {
-                RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9"
-            });
+        private void SeedOwnerRights(ModelBuilder builder)
+        {
+
+            builder.Entity<IdentityUserRole<string>>()
+                .HasData(
+                    new IdentityUserRole<string>
+                    {
+                        RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+                        UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9"
+                    }
+                );
+
+            //builder.Entity<IdentityUserRole<string>>().HasData(
+            //new IdentityUserRole
+            //{
+            //    RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+            //    UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9"
+            //});
         }
     }
 }
