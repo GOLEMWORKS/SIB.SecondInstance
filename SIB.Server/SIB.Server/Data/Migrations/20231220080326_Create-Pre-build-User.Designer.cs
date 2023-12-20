@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIB.Server.Data;
 
@@ -11,9 +12,11 @@ using SIB.Server.Data;
 namespace SIB.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231220080326_Create-Pre-build-User")]
+    partial class CreatePrebuildUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace SIB.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+                            Id = "e63e3f91-bbcb-493a-b391-af5b8f5ced08",
                             ConcurrencyStamp = "1",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
-                            Id = "2806545e-f9d6-41fc-9288-c850ed4e236a",
+                            Id = "554803e3-31ea-4104-8371-d02147b3a3e3",
                             ConcurrencyStamp = "2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "98ac59fc-c580-497a-a323-3f1888d57d12",
+                            Id = "d699e126-32fd-40a9-95e4-51797bc1f6e9",
                             ConcurrencyStamp = "3",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "42b54096-c562-4103-b71a-b5359cd476be",
+                            Id = "f6d185c3-8b98-4fb6-972e-a6f801c8d298",
                             ConcurrencyStamp = "4",
                             Name = "Creator",
                             NormalizedName = "CREATOR"
@@ -164,13 +167,6 @@ namespace SIB.Server.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9",
-                            RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -262,16 +258,16 @@ namespace SIB.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            Id = "0354aed4-4475-4182-8b27-cb68b41a6b45",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ac1cc69b-9053-46b7-bdba-cc39640fe613",
-                            DateOfRegistration = new DateTime(2023, 12, 20, 10, 11, 49, 281, DateTimeKind.Local).AddTicks(6112),
+                            ConcurrencyStamp = "b1a0c6a7-b4a5-4ed2-9525-82a08013ef16",
+                            DateOfRegistration = new DateTime(2023, 12, 20, 10, 3, 26, 612, DateTimeKind.Local).AddTicks(8488),
                             Email = "Owner@owner.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@OWNER.COM",
                             NormalizedUserName = "OWNER",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFX1R+ozGwfopoMCY7y/oMDCe8574l50i6Jw4z9kIgXfcqpNh6ehGr4yWnn9/Wv1GQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEFxE8sGhwTWcUUGeYTJN3vVjCH8hD9Ah+LtvDTNxDwic2dW98VIXttQt8PrPDUPOw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "01.01.0001 0:00:00",
                             TwoFactorEnabled = false,
