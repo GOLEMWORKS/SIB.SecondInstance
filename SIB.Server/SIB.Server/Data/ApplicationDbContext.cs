@@ -34,7 +34,6 @@ namespace SIB.Server.Data
                     new IdentityRole() { Name = "Creator", ConcurrencyStamp = "4", NormalizedName = "Creator".ToUpper() }
                 );
         }
-
         private void SeedOwner(ModelBuilder builder)
         {
             var hasher = new PasswordHasher<ApplicationUser>();
