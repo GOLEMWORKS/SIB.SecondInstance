@@ -7,7 +7,7 @@ namespace SIB.Server.Data
     {
         public DateTime DateOfRegistration { get; set; } = DateTime.Now;
 
-        public ICollection<Article> Articles { get; set; }
+        public List<Article> Articles { get; set; }
     }
 
 }
