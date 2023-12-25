@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection.Emit;
 
 namespace SIB.Server.Data
@@ -13,6 +15,8 @@ namespace SIB.Server.Data
             this.SeedRoles(builder);
             this.SeedOwner(builder);
         }
+
+        public DbSet<Article> Articles { get; set; }
 
         private void SeedRoles(ModelBuilder builder)
         {
@@ -49,5 +53,6 @@ namespace SIB.Server.Data
                 UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9"
             });
         }
+
     }
 }

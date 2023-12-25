@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIB.Server.Data;
 
@@ -11,9 +12,11 @@ using SIB.Server.Data;
 namespace SIB.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231225194326_AddingArticlesDb")]
+    partial class AddingArticlesDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,21 +61,21 @@ namespace SIB.Server.Migrations
                         },
                         new
                         {
-                            Id = "1f3ff046-0cd0-4e3a-a409-9d25b99038a3",
+                            Id = "8a4da1c2-5a44-4549-a5b0-3c07d20226b3",
                             ConcurrencyStamp = "2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "518f4851-a10c-4ea3-a7fa-f89effdcd00c",
+                            Id = "79ff00ab-147e-439f-b80b-a0fedba7d832",
                             ConcurrencyStamp = "3",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "ce4b7dbb-b2c4-4499-943c-f8e7d29b8ffc",
+                            Id = "65d7fdb7-1ad2-4e1a-bd39-b2e04b106f06",
                             ConcurrencyStamp = "4",
                             Name = "Creator",
                             NormalizedName = "CREATOR"
@@ -264,14 +267,14 @@ namespace SIB.Server.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e31fc0bd-f944-49bd-a1e6-cc433d71f551",
-                            DateOfRegistration = new DateTime(2023, 12, 25, 21, 46, 17, 386, DateTimeKind.Local).AddTicks(9222),
+                            ConcurrencyStamp = "f8753047-086c-441e-a267-c5df9fcd8f76",
+                            DateOfRegistration = new DateTime(2023, 12, 25, 21, 43, 26, 288, DateTimeKind.Local).AddTicks(227),
                             Email = "Owner@owner.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@OWNER.COM",
                             NormalizedUserName = "OWNER@OWNER.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMiXENx1A857BX5fNPZHBSNZ4jfQhhZMXN5qWezBy7/Bsy4Rbi+BfAeu9UCDfeMOZQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELne6PBrCpX+yg8nmWS1iboEZo4i54HdALMyjY57J4EIBuj3m4AOaWo9XLQjVst/IQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "01.01.0001 0:00:00",
                             TwoFactorEnabled = false,
@@ -309,7 +312,7 @@ namespace SIB.Server.Migrations
 
                     b.HasIndex("Author");
 
-                    b.ToTable("Articles");
+                    b.ToTable("articles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

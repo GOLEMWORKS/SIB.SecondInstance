@@ -6,6 +6,8 @@ namespace SIB.Server.Data
     public class ApplicationUser : IdentityUser
     {
         public DateTime DateOfRegistration { get; set; } = DateTime.Now;
+
+        public ICollection<Article> Articles { get; set; }
     }
 
 }
