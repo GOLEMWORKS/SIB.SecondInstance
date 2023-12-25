@@ -18,6 +18,10 @@ namespace SIB.Server.Data
 
         public DbSet<Article> Articles { get; set; }
 
+        private void SeedArticles(ModelBuilder builder)
+        {
+            
+        }
         private void SeedRoles(ModelBuilder builder)
         {
             builder.Entity<IdentityRole>().HasData(
