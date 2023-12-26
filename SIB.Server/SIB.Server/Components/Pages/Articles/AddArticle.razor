@@ -1,0 +1,11 @@
+﻿@page "/addarticle"
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [StreamRendering]
+@attribute [Authorize(Policy = "Owner")]
+
+<h3>Add Article</h3>
+
+@code {
+
+}
