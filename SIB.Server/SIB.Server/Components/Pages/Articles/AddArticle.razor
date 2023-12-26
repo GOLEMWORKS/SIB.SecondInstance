@@ -7,7 +7,7 @@
 
 <h3>Add Article</h3>
 
-@* <EditForm Model="article">
+<EditForm Model="article" OnValidSubmit="OnValidSubmit">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <ValidationSummary></ValidationSummary>
 
@@ -16,9 +16,27 @@
         <InputText id="Title" @bind-Value="article.Title" class="form-control"></InputText>
     </div>
 
-</EditForm> *@
+    <div class="form-group">
+        <label for="Description">Текст статьи</label>
+        <InputText id="Description" @bind-Value="article.Description" class="form-control"></InputText>
+    </div>
 
-@CurrentUserName
+    <div class="form-group">
+        <label for="Views">Указать просмотры заранее</label>
+        <InputNumber id="Description" @bind-Value="article.Views" class="form-control"></InputNumber>
+    </div>
+
+    <div class="form-group">
+        <label for="DOC">Дата создания</label>
+        <InputDate id="DOC" @bind-Value="article.DOC" class="form-control" disabled></InputDate>
+    </div>
+
+    <button type="submit">
+        submit
+    </button>
+
+</EditForm>
+
 
 @code {
 
@@ -28,8 +46,8 @@
     [Inject]
     UserManager<ApplicationUser> userManager { get; set; }
 
-    private string CurrentUserName;
-    private Article? article;
+    private Article article = new Article();
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -37,11 +55,12 @@
 
         if (user.Identity.IsAuthenticated)
         {
-            var currentUser = await userManager.GetUserAsync(user);
-            var userName = currentUser.UserName;
-            CurrentUserName = userName;
+            // var currentUser = await userManager.GetUserAsync(user);
+            article.User = await userManager.GetUserAsync(user);
         }
         else return;
     }
 
+
+    private void OnValidSubmit() => _addArticleUseCase.ExecuteAsync(article);
 }
