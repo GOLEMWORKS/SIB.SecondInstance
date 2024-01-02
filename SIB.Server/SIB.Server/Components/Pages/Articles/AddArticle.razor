@@ -37,7 +37,6 @@
 
 </EditForm>
 
-
 @code {
 
     [CascadingParameter]
@@ -47,13 +46,13 @@
     UserManager<ApplicationUser> userManager { get; set; }
 
     [SupplyParameterFromForm(FormName = "ArticleForm")]
-    public Article? article { get; set; } = new();
-
+    public Article? article { get; set;}
 
     protected override async Task OnInitializedAsync()
     {
-        var user = (await authenticationState).User;
+        article = new();
 
+        var user = (await authenticationState).User;
         if (user.Identity.IsAuthenticated)
         {
             // var currentUser = await userManager.GetUserAsync(user);
@@ -63,5 +62,8 @@
     }
 
 
-    private void OnValidSubmit() => _addArticleUseCase.ExecuteAsync(article);
+    private void OnValidSubmit() 
+    {
+        _addArticleUseCase.ExecuteAsync(article);
+    }
 }
