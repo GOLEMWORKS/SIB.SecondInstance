@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Radzen;
 using SIB.Server.Client.Pages;
 using SIB.Server.Components;
 using SIB.Server.Components.Account;
@@ -46,6 +47,7 @@ builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
 builder.Services.AddTransient<IAddArticleUseCase, AddArticleUseCase>();
 builder.Services.AddTransient<IGetAllArticlesUseCase, GetAllArticlesUseCase>();
 
+builder.Services.AddRadzenComponents();
 
 builder.Services.AddAuthorization(options =>
 {
