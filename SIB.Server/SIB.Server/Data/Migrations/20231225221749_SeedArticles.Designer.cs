@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIB.Server.Data;
 
@@ -11,9 +12,11 @@ using SIB.Server.Data;
 namespace SIB.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231225221749_SeedArticles")]
+    partial class SeedArticles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,21 +61,21 @@ namespace SIB.Server.Migrations
                         },
                         new
                         {
-                            Id = "d27dab82-a301-4728-80cb-59f3f43f20b0",
+                            Id = "86a10a02-9095-4d7b-bee3-23656a2ea858",
                             ConcurrencyStamp = "2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "91e51210-4d19-4672-ae16-759acbe9b7d7",
+                            Id = "191cfc5d-0532-4954-bce6-12ff8d16ad5d",
                             ConcurrencyStamp = "3",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "cd58d210-400d-429d-8e2b-a9961dc993c0",
+                            Id = "e3a396a7-845b-430a-bfd9-556156854319",
                             ConcurrencyStamp = "4",
                             Name = "Creator",
                             NormalizedName = "CREATOR"
@@ -264,14 +267,14 @@ namespace SIB.Server.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c20fe15a-d871-4e28-bc3f-04b715128945",
-                            DateOfRegistration = new DateTime(2023, 12, 26, 0, 22, 56, 166, DateTimeKind.Local).AddTicks(7037),
+                            ConcurrencyStamp = "934799a2-ced5-4c92-be47-5d9ad710f9b1",
+                            DateOfRegistration = new DateTime(2023, 12, 26, 0, 17, 49, 386, DateTimeKind.Local).AddTicks(5290),
                             Email = "Owner@owner.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@OWNER.COM",
                             NormalizedUserName = "OWNER@OWNER.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKm2qptPCAUFCkHabIvtg9vVzX/qZR+Vt8WVdK7r73w0w0xAC4GMZfP/RXCYBaKVFw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMytkkJ6h9CAiGP7As3I/lZKIlkwfNlGeOnpK1pNH8XjSmBsjNXKXtTV/zKsj9A+5A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "01.01.0001 0:00:00",
                             TwoFactorEnabled = false,
@@ -299,7 +302,6 @@ namespace SIB.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Views")
@@ -367,9 +369,7 @@ namespace SIB.Server.Migrations
                 {
                     b.HasOne("SIB.Server.Data.ApplicationUser", "User")
                         .WithMany("Articles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

@@ -1,0 +1,71 @@
+﻿@page "/addarticle"
+
+@attribute [Authorize(Policy = "CreatorPolicy")]
+
+@inject IAddArticleUseCase _addArticleUseCase
+@inject NavigationManager navMan
+@rendermode InteractiveServer
+
+<h3>Добавление статьи</h3>
+
+<EditForm Model="@article" method="post" OnValidSubmit="OnValidSubmit" FormName="ArticleForm">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <div class="form-group">
+        <label for="Title">Название статьи</label>
+        <InputText id="Title" @bind-Value="article!.Title" class="form-control"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Текст статьи</label>
+        <InputText id="Description" @bind-Value="article.Description" class="form-control"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label for="Views">Указать просмотры заранее</label>
+        <InputNumber id="Description" @bind-Value="article.Views" class="form-control"></InputNumber>
+    </div>
+
+    <div class="form-group">
+        <label for="DOC">Дата создания</label>
+        <InputDate id="DOC" @bind-Value="article.DOC" class="form-control" disabled></InputDate>
+    </div>
+
+    <button class="btn btn-success" type="submit">
+        submit
+    </button>
+
+</EditForm>
+
+@code {
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState { get; set; }
+
+    [Inject]
+    UserManager<ApplicationUser> userManager { get; set; }
+
+    [SupplyParameterFromForm(FormName = "ArticleForm")]
+    public Article? article { get; set;}
+
+    protected override async Task OnInitializedAsync()
+    {
+        article = new();
+
+        var user = (await authenticationState).User;
+        if (user.Identity.IsAuthenticated)
+        {
+            // var currentUser = await userManager.GetUserAsync(user);
+            article.User = await userManager.GetUserAsync(user);
+        }
+        else return;
+    }
+
+
+    private void OnValidSubmit() 
+    {
+        _addArticleUseCase.ExecuteAsync(article);
+        navMan.NavigateTo("/");
+    }
+}

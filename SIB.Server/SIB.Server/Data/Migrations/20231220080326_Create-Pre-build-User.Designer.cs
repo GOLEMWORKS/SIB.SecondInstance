@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIB.Server.Data;
 
@@ -11,9 +12,11 @@ using SIB.Server.Data;
 namespace SIB.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231220080326_Create-Pre-build-User")]
+    partial class CreatePrebuildUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,28 +54,28 @@ namespace SIB.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+                            Id = "e63e3f91-bbcb-493a-b391-af5b8f5ced08",
                             ConcurrencyStamp = "1",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         },
                         new
                         {
-                            Id = "d27dab82-a301-4728-80cb-59f3f43f20b0",
+                            Id = "554803e3-31ea-4104-8371-d02147b3a3e3",
                             ConcurrencyStamp = "2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "91e51210-4d19-4672-ae16-759acbe9b7d7",
+                            Id = "d699e126-32fd-40a9-95e4-51797bc1f6e9",
                             ConcurrencyStamp = "3",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "cd58d210-400d-429d-8e2b-a9961dc993c0",
+                            Id = "f6d185c3-8b98-4fb6-972e-a6f801c8d298",
                             ConcurrencyStamp = "4",
                             Name = "Creator",
                             NormalizedName = "CREATOR"
@@ -164,13 +167,6 @@ namespace SIB.Server.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9",
-                            RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -262,54 +258,21 @@ namespace SIB.Server.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            Id = "0354aed4-4475-4182-8b27-cb68b41a6b45",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c20fe15a-d871-4e28-bc3f-04b715128945",
-                            DateOfRegistration = new DateTime(2023, 12, 26, 0, 22, 56, 166, DateTimeKind.Local).AddTicks(7037),
+                            ConcurrencyStamp = "b1a0c6a7-b4a5-4ed2-9525-82a08013ef16",
+                            DateOfRegistration = new DateTime(2023, 12, 20, 10, 3, 26, 612, DateTimeKind.Local).AddTicks(8488),
                             Email = "Owner@owner.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@OWNER.COM",
-                            NormalizedUserName = "OWNER@OWNER.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKm2qptPCAUFCkHabIvtg9vVzX/qZR+Vt8WVdK7r73w0w0xAC4GMZfP/RXCYBaKVFw==",
+                            NormalizedUserName = "OWNER",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEFxE8sGhwTWcUUGeYTJN3vVjCH8hD9Ah+LtvDTNxDwic2dW98VIXttQt8PrPDUPOw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "01.01.0001 0:00:00",
                             TwoFactorEnabled = false,
-                            UserName = "Owner@owner.com"
+                            UserName = "Owner"
                         });
-                });
-
-            modelBuilder.Entity("SIB.Server.Data.Article", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DOC")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Views")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -361,22 +324,6 @@ namespace SIB.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SIB.Server.Data.Article", b =>
-                {
-                    b.HasOne("SIB.Server.Data.ApplicationUser", "User")
-                        .WithMany("Articles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SIB.Server.Data.ApplicationUser", b =>
-                {
-                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

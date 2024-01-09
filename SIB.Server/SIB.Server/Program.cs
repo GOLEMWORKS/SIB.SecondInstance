@@ -5,6 +5,10 @@ using SIB.Server.Client.Pages;
 using SIB.Server.Components;
 using SIB.Server.Components.Account;
 using SIB.Server.Data;
+using SIB.Server.Plugins;
+using SIB.Server.UseCases;
+using SIB.Server.UseCases.Interfaces;
+using SIB.Server.UseCases.PluginInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,15 +35,23 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();
+//Репозитории
+builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
+
+//Use Cases
+builder.Services.AddTransient<IAddArticleUseCase, AddArticleUseCase>();
+
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
-    options.AddPolicy("Moderator", policy => policy.RequireRole("Moderator"));
-    options.AddPolicy("Creator", policy => policy.RequireRole("Creator"));
+    options.AddPolicy("OwnerPolicy", policy => policy.RequireRole("Owner"));
+    options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin","Owner"));
+    options.AddPolicy("ModeratorPolicy", policy => policy.RequireRole("Moderator", "Admin", "Owner"));
+    options.AddPolicy("CreatorPolicy", policy => policy.RequireRole("Creator", "Moderator","Admin", "Owner"));
 });
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
