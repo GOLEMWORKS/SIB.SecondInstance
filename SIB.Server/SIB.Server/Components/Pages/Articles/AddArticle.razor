@@ -31,9 +31,18 @@
         <label for="DOC">Дата создания</label>
         <InputDate id="DOC" @bind-Value="article.DOC" class="form-control" disabled></InputDate>
     </div>
+    <br />
+    <div class="form-group">
+        <i>Видимость статьи: </i> <br />
+        <InputRadioGroup Name="IsVisible" @bind-Value="article.IsVisible">
+            <InputRadio Name="IsVisible" Value="@true" />Видно для всех <br />
+            <InputRadio Name="IsVisible" Value="@false"/>Видно только для админов <br />
+        </InputRadioGroup>
+    </div>
 
+    <br />
     <button class="btn btn-success" type="submit">
-        submit
+        Подтвердить
     </button>
 
 </EditForm>
