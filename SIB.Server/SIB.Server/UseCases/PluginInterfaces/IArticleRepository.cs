@@ -6,5 +6,6 @@ namespace SIB.Server.UseCases.PluginInterfaces
     {
         Task AddArticleAsync(Article article);
         Task<IEnumerable<Article>> GetArticlesById(int articleID);
+        Task<List<Article>> GetAllArticlesAsync();
     }
 }

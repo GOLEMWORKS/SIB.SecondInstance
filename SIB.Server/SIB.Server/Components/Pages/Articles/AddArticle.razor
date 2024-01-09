@@ -3,9 +3,10 @@
 @attribute [Authorize(Policy = "CreatorPolicy")]
 
 @inject IAddArticleUseCase _addArticleUseCase
+@inject NavigationManager navMan
 @rendermode InteractiveServer
 
-<h3>Add Article</h3>
+<h3>Добавление статьи</h3>
 
 <EditForm Model="@article" method="post" OnValidSubmit="OnValidSubmit" FormName="ArticleForm">
     <DataAnnotationsValidator></DataAnnotationsValidator>
@@ -31,7 +32,7 @@
         <InputDate id="DOC" @bind-Value="article.DOC" class="form-control" disabled></InputDate>
     </div>
 
-    <button type="submit">
+    <button class="btn btn-success" type="submit">
         submit
     </button>
 
@@ -65,5 +66,6 @@
     private void OnValidSubmit() 
     {
         _addArticleUseCase.ExecuteAsync(article);
+        navMan.NavigateTo("/");
     }
 }

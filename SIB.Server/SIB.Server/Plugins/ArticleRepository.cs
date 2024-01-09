@@ -8,9 +8,9 @@ namespace SIB.Server.Plugins
     {
         private readonly ApplicationDbContext _context;
 
-        public ArticleRepository(ApplicationDbContext _context)
+        public ArticleRepository(ApplicationDbContext context)
         {
-            this._context = _context;
+            _context = context;
         }
 
         public async Task AddArticleAsync(Article article)
@@ -23,8 +23,12 @@ namespace SIB.Server.Plugins
 
         public async Task<IEnumerable<Article>> GetArticlesById(int articleID)
         {
-            return await this._context.Articles.Where(a => a.Id == articleID).ToListAsync();
+            return await _context.Articles.Where(a => a.Id == articleID).ToListAsync();
         }
 
+        public async Task<List<Article>> GetAllArticlesAsync()
+        {
+            return await _context.Articles.ToListAsync();
+        }
     }
 }
