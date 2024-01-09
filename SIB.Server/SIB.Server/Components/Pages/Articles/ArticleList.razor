@@ -2,7 +2,18 @@
 
 @attribute [Authorize(Policy = "CreatorPolicy")]
 
+@inject IGetAllArticlesUseCase _getAllArticlesUseCase
+@inject NavigationManager navMan
+
+@rendermode InteractiveServer
+
+
 
 @code {
+    private List<Article>? articles;
 
+    protected override async Task OnInitializedAsync()
+    {
+        articles = await _getAllArticlesUseCase.ExecuteAsync();
+    }
 }

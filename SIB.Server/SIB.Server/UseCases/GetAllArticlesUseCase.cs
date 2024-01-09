@@ -12,9 +12,9 @@ namespace SIB.Server.UseCases
             _articleRepository = articleRepository;
         }
 
-        public async Task ExecuteAsync()
+        public async Task<List<Article>> ExecuteAsync()
         {
-            await _articleRepository.GetAllArticlesAsync();
+            return await _articleRepository.GetAllArticlesAsync();
         }
     }
 }

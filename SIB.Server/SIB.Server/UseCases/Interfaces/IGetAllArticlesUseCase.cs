@@ -1,7 +1,9 @@
-﻿namespace SIB.Server.UseCases.Interfaces
+﻿using SIB.Server.Data;
+
+namespace SIB.Server.UseCases.Interfaces
 {
     public interface IGetAllArticlesUseCase
     {
-        Task ExecuteAsync();
+        Task<List<Article>> ExecuteAsync();
     }
 }
