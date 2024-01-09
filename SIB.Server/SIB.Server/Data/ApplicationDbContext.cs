@@ -14,17 +14,17 @@ namespace SIB.Server.Data
             base.OnModelCreating(builder);
             this.SeedRoles(builder);
             this.SeedOwner(builder);
-            this.SeedArticles(builder);
+            //this.SeedArticles(builder);
         }
 
         public DbSet<Article> Articles { get; set; }
 
-        private void SeedArticles(ModelBuilder builder)
-        {
-            builder.Entity<Article>()
-                .HasOne(p => p.User)
-                .WithMany(p => p.Articles);
-        }
+        //private void SeedArticles(ModelBuilder builder)
+        //{
+        //    builder.Entity<Article>()
+        //        .HasOne(p => p.Author)
+        //        .WithMany(p => p);
+        //}
         private void SeedRoles(ModelBuilder builder)
         {
             builder.Entity<IdentityRole>().HasData(
@@ -58,11 +58,6 @@ namespace SIB.Server.Data
                 RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210",
                 UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9"
             });
-
-            //builder.Entity<Article>()
-            //    .HasData(
-            //    new Article { Id = 1, User = Users.First(u => u.Id == "8e445865-a24d-4543-a6c6-9443d048cdb9"), Description = "Seeded Article", DOC = DateTime.Now, Title = "Owner's seeded article", Views = 0 }
-            //);
         }
 
     }

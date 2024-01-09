@@ -20,9 +20,9 @@
         <RadzenDataGridColumn TItem="Article" Title="Заголовок статьи">
             <Template Context="articles">@articles.Title</Template>
         </RadzenDataGridColumn>
-        @* <RadzenDataGridColumn TItem="Article" Title="Текст">
-            <Template Context="articles">@articles.User.UserName</Template>
-        </RadzenDataGridColumn> *@
+        <RadzenDataGridColumn TItem="Article" Title="Текст">
+            <Template Context="articles">@articles.Author</Template>
+        </RadzenDataGridColumn>
     </Columns>
 
 </RadzenDataGridRU>

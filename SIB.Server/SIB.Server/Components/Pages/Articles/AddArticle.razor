@@ -56,8 +56,8 @@
         var user = (await authenticationState).User;
         if (user.Identity.IsAuthenticated)
         {
-            // var currentUser = await userManager.GetUserAsync(user);
-            article.User = await userManager.GetUserAsync(user);
+            var currentUser = await userManager.GetUserAsync(user);
+            article.Author = currentUser.UserName ?? "nullUser";
         }
         else return;
     }
