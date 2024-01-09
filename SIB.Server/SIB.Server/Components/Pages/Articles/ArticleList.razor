@@ -7,7 +7,30 @@
 
 @rendermode InteractiveServer
 
+<RadzenDataGridRU
+    Data="@articles"
+    TItem="Article"
+    AllowFiltering="true" 
+    AllowSorting="true" 
+    AllowPaging="true" 
+    PageSize="10"
+    ShowPagingSummary="true">
 
+    <Columns>
+        <RadzenDataGridColumn TItem="Article" Title="Заголовок статьи">
+            <Template Context="articles">@articles.Title</Template>
+        </RadzenDataGridColumn>
+        @* <RadzenDataGridColumn TItem="Article" Title="Текст">
+            <Template Context="articles">@articles.User.UserName</Template>
+        </RadzenDataGridColumn> *@
+    </Columns>
+
+</RadzenDataGridRU>
+
+@* @foreach (var item in articles)
+{
+    @item.User;
+} *@
 
 @code {
     private List<Article>? articles;

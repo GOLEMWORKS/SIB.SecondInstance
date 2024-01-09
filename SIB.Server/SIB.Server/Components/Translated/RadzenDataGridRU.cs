@@ -1,4 +1,5 @@
-﻿using Radzen.Blazor;
+﻿using Microsoft.AspNetCore.Components;
+using Radzen.Blazor;
 
 namespace SIB.Server.Components.Translated
 {
@@ -6,7 +7,6 @@ namespace SIB.Server.Components.Translated
     {
         public RadzenDataGridRU() : base()
         {
-
             base.AndOperatorText = "И";
             base.EqualsText = "Равен";
             base.NotEqualsText = "Не равен";

@@ -13,5 +13,6 @@ namespace SIB.Server.Data
         public ApplicationUser User { get; set; }
         public DateTime DOC { get; set; } = DateTime.Now;
         public int Views { get; set; }
+        public bool IsVisible { get; set; } = true;
     }
 }
