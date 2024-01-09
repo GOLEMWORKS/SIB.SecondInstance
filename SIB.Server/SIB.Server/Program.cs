@@ -44,6 +44,7 @@ builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
 
 //Use Cases
 builder.Services.AddTransient<IAddArticleUseCase, AddArticleUseCase>();
+builder.Services.AddTransient<IGetAllArticlesUseCase, GetAllArticlesUseCase>();
 
 
 builder.Services.AddAuthorization(options =>
