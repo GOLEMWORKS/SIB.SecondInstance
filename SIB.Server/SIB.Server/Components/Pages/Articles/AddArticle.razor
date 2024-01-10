@@ -18,8 +18,18 @@
     </div>
 
     <div class="form-group">
-        <label for="Description">Текст статьи</label>
+        <label for="Description">Краткое описание</label>
         <InputText id="Description" @bind-Value="article.Description" class="form-control"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label for="Content">Текст статьи</label>
+        <InputText id="Content" @bind-Value="article.Content" class="form-control"></InputText>
+    </div>
+
+    <div class="form-group">
+        <label for="Content">Тэги</label>
+        <InputText id="Content" @bind-Value="article.Content" class="form-control"></InputText>
     </div>
 
     <div class="form-group">
@@ -33,8 +43,8 @@
     </div>
     <br />
     <div class="form-group">
-        <i>Видимость статьи: </i> <br />
-        <InputRadioGroup Name="IsVisible" @bind-Value="article.IsVisible">
+        <label for="Ratio">Видимость статьи: </label>
+        <InputRadioGroup Name="IsVisible" @bind-Value="article.IsVisible" id="Ratio">
             <InputRadio Name="IsVisible" Value="@true" />Видно для всех <br />
             <InputRadio Name="IsVisible" Value="@false"/>Видно только для админов <br />
         </InputRadioGroup>

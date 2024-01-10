@@ -12,19 +12,14 @@ namespace SIB.Server.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            this.SeedRoles(builder);
-            this.SeedOwner(builder);
-            //this.SeedArticles(builder);
+            SeedRoles(builder);
+            SeedOwner(builder);
+            SeedSimpleTags(builder);         
         }
 
         public DbSet<Article> Articles { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
-        //private void SeedArticles(ModelBuilder builder)
-        //{
-        //    builder.Entity<Article>()
-        //        .HasOne(p => p.Author)
-        //        .WithMany(p => p);
-        //}
         private void SeedRoles(ModelBuilder builder)
         {
             builder.Entity<IdentityRole>().HasData(
@@ -60,5 +55,12 @@ namespace SIB.Server.Data
             });
         }
 
+        private void SeedSimpleTags(ModelBuilder builder)
+        {
+            builder.Entity<Tag>().HasData(
+                new Tag () { Id = 1, Name = "Протоколы"},
+                new Tag() { Id = 2, Name = "Структуры данных" }
+            );
+        }
     }
 }
