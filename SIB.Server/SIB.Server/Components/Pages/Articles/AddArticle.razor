@@ -29,7 +29,6 @@
 
     //Компонент для тэгов!
     <SelectTagsComponent 
-        @ref="selectTagsComponent"
         OnSelectedTags="OnSelectedTags">
     </SelectTagsComponent>
 
@@ -68,8 +67,6 @@
 
     [SupplyParameterFromForm(FormName = "ArticleForm")]
     public Article? article { get; set;}
-
-    private SelectTagsComponent selectTagsComponent;
 
     private void OnSelectedTags(List<Tag> tags)
     {

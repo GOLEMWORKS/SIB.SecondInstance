@@ -13,7 +13,7 @@
             @foreach (var tag in tags)
             {
                 <tr>
-                    <td>@tag.Name</td>
+                    <td @onclick="() => OnSelectedTag(tag)" style="cursor: pointer;">@tag.Name</td>
                     <td>
                         <button 
                             class="btn btn-danger"
@@ -31,9 +31,9 @@
     [Parameter]
     public EventCallback<List<Tag>> OnSelectedTags { get; set; }
 
-    [Parameter]
     public List<Tag> tags { get; set; }
 
+    public List<Tag> selectedTags { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,11 +42,12 @@
 
     private async Task OnSelectedTag(Tag tag)
     {
-        await OnSelectedTags.InvokeAsync(this.tags);
+        selectedTags.Add(tag);
+        await OnSelectedTags.InvokeAsync(this.selectedTags);
     }
 
     private void RemoveTag(Tag tag)
     {
-        this.tags.Remove(tag);
+        this.selectedTags.Remove(tag);
     }
 }
