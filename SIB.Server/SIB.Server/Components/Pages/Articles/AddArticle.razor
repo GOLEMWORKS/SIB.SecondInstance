@@ -24,13 +24,14 @@
 
     <div class="form-group">
         <label for="Content">Текст статьи</label>
-        <InputText id="Content" @bind-Value="article.Content" class="form-control"></InputText>
+        <InputTextArea id="Content" @bind-Value="article.Content" class="form-control"></InputTextArea>
     </div>
 
-    <div class="form-group">
-        <label for="Content">Тэги</label>
-        <InputText id="Content" @bind-Value="article.Content" class="form-control"></InputText>
-    </div>
+    //Компонент для тэгов!
+    <SelectTagsComponent 
+        @ref="selectTagsComponent"
+        OnSelectedTags="OnSelectedTags">
+    </SelectTagsComponent>
 
     <div class="form-group">
         <label for="Views">Указать просмотры заранее</label>
@@ -68,6 +69,13 @@
     [SupplyParameterFromForm(FormName = "ArticleForm")]
     public Article? article { get; set;}
 
+    private SelectTagsComponent selectTagsComponent;
+
+    private void OnSelectedTags(List<Tag> tags)
+    {
+        this.article.Tags = tags;
+    }
+
     protected override async Task OnInitializedAsync()
     {
         article = new();
@@ -80,7 +88,6 @@
         }
         else return;
     }
-
 
     private void OnValidSubmit() 
     {

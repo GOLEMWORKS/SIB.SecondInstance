@@ -1,0 +1,52 @@
+﻿@inject IGetAllTagsUseCase _getAllTagsUseCase
+
+@if (tags != null && tags.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tag in tags)
+            {
+                <tr>
+                    <td>@tag.Name</td>
+                    <td>
+                        <button 
+                            class="btn btn-danger"
+                            @onclick="()=>RemoveTag(tag)">
+                            X
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter]
+    public EventCallback<List<Tag>> OnSelectedTags { get; set; }
+
+    [Parameter]
+    public List<Tag> tags { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        tags = await _getAllTagsUseCase.ExecuteAsync();
+    }
+
+    private async Task OnSelectedTag(Tag tag)
+    {
+        await OnSelectedTags.InvokeAsync(this.tags);
+    }
+
+    private void RemoveTag(Tag tag)
+    {
+        this.tags.Remove(tag);
+    }
+}
