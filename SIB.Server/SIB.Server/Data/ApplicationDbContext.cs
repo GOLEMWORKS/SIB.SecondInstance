@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+п»їusing Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -58,8 +58,8 @@ namespace SIB.Server.Data
         private void SeedSimpleTags(ModelBuilder builder)
         {
             builder.Entity<Tag>().HasData(
-                new Tag () { Id = 1, Name = "Протоколы"},
-                new Tag() { Id = 2, Name = "Структуры данных" }
+                new Tag () { Id = 1, Name = "РџСЂРѕС‚РѕРєРѕР»С‹ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё"},
+                new Tag() { Id = 2, Name = "WEB" }
             );
         }
     }
