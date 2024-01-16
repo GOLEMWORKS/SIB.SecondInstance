@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIB.Server.Data;
 
@@ -11,9 +12,11 @@ using SIB.Server.Data;
 namespace SIB.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240109210751_remake-user-in-articles")]
+    partial class remakeuserinarticles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,21 +61,21 @@ namespace SIB.Server.Migrations
                         },
                         new
                         {
-                            Id = "81d29205-1cb3-441f-9681-cf0bff8d4cb1",
+                            Id = "69471c63-ba5a-44be-b1f3-7e83fcc2dc51",
                             ConcurrencyStamp = "2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "40cf8cfe-f396-4454-976e-281baa5e6504",
+                            Id = "6911fddd-7b6f-4b3e-bf87-554d14c84ffe",
                             ConcurrencyStamp = "3",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "0b35306a-861c-4030-bd95-ed65cf4e35b9",
+                            Id = "4d5965de-8754-4607-924e-b5968f6c2562",
                             ConcurrencyStamp = "4",
                             Name = "Creator",
                             NormalizedName = "CREATOR"
@@ -264,14 +267,14 @@ namespace SIB.Server.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b27b6253-2240-4713-b566-4e63841d8d7f",
-                            DateOfRegistration = new DateTime(2024, 1, 10, 14, 6, 10, 555, DateTimeKind.Local).AddTicks(6433),
+                            ConcurrencyStamp = "d858d30a-4cd0-4fe3-b2a1-bbf4b4dd7eda",
+                            DateOfRegistration = new DateTime(2024, 1, 9, 23, 7, 50, 772, DateTimeKind.Local).AddTicks(8959),
                             Email = "Owner@owner.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@OWNER.COM",
                             NormalizedUserName = "OWNER@OWNER.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEN7UExwmOLePdsc3QPd7EknnUnlpilxm6ofcGnyIb0XTxyKKAEWedYYrxWPGV+SQLQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL3TTRqSFn/b7JfUdbtYd1mjbJJgVHU9wguPqizUd7YErDVtS2+pmzz8tiITn99crw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "01.01.0001 0:00:00",
                             TwoFactorEnabled = false,
@@ -288,10 +291,6 @@ namespace SIB.Server.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -315,40 +314,6 @@ namespace SIB.Server.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Articles");
-                });
-
-            modelBuilder.Entity("SIB.Server.Data.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.ToTable("Tags");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Протоколы"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Структуры данных"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -400,18 +365,6 @@ namespace SIB.Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("SIB.Server.Data.Tag", b =>
-                {
-                    b.HasOne("SIB.Server.Data.Article", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("ArticleId");
-                });
-
-            modelBuilder.Entity("SIB.Server.Data.Article", b =>
-                {
-                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

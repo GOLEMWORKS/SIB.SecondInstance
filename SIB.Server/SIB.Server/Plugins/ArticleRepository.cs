@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SIB.Server.Data;
 using SIB.Server.UseCases.PluginInterfaces;
+using System.Linq.Dynamic.Core;
 
 namespace SIB.Server.Plugins
 {
