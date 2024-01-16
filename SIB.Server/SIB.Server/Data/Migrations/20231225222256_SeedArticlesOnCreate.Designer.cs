@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SIB.Server.Data;
 
@@ -11,9 +12,11 @@ using SIB.Server.Data;
 namespace SIB.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231225222256_SeedArticlesOnCreate")]
+    partial class SeedArticlesOnCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,21 +61,21 @@ namespace SIB.Server.Migrations
                         },
                         new
                         {
-                            Id = "4542c9bc-8355-4cc8-a37f-7da5b8dbb9d3",
+                            Id = "d27dab82-a301-4728-80cb-59f3f43f20b0",
                             ConcurrencyStamp = "2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f1accc7d-c9f7-4c5c-a668-f0e2763913b6",
+                            Id = "91e51210-4d19-4672-ae16-759acbe9b7d7",
                             ConcurrencyStamp = "3",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "4e47d9c4-d52a-4c74-8d27-a64af88d9a81",
+                            Id = "cd58d210-400d-429d-8e2b-a9961dc993c0",
                             ConcurrencyStamp = "4",
                             Name = "Creator",
                             NormalizedName = "CREATOR"
@@ -264,14 +267,14 @@ namespace SIB.Server.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "33dae502-8d9b-40b1-820e-f2396ed80dfd",
-                            DateOfRegistration = new DateTime(2023, 12, 20, 10, 32, 24, 72, DateTimeKind.Local).AddTicks(1213),
+                            ConcurrencyStamp = "c20fe15a-d871-4e28-bc3f-04b715128945",
+                            DateOfRegistration = new DateTime(2023, 12, 26, 0, 22, 56, 166, DateTimeKind.Local).AddTicks(7037),
                             Email = "Owner@owner.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "OWNER@OWNER.COM",
                             NormalizedUserName = "OWNER@OWNER.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEE23QOYuGXSvEZp+c66s1kmbLiy9ofXG7QtSR+APu5nmjbMbOwjTUvGBbt9LNAyhzg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKm2qptPCAUFCkHabIvtg9vVzX/qZR+Vt8WVdK7r73w0w0xAC4GMZfP/RXCYBaKVFw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "01.01.0001 0:00:00",
                             TwoFactorEnabled = false,
