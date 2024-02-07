@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Radzen;
 using SIB.Server.Client.Pages;
 using SIB.Server.Components;
 using SIB.Server.Components.Account;
@@ -34,6 +35,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+builder.Services.AddTransient<ApplicationDbContext, ApplicationDbContext>();
+
 builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -41,11 +44,14 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 //Репозитории
 builder.Services.AddTransient<IArticleRepository, ArticleRepository>();
+builder.Services.AddTransient<ITagsRepository, TagsRepository>();
 
 //Use Cases
 builder.Services.AddTransient<IAddArticleUseCase, AddArticleUseCase>();
 builder.Services.AddTransient<IGetAllArticlesUseCase, GetAllArticlesUseCase>();
+builder.Services.AddTransient<IGetAllTagsUseCase, GetAllTagsUseCase>();
 
+builder.Services.AddRadzenComponents();
 
 builder.Services.AddAuthorization(options =>
 {

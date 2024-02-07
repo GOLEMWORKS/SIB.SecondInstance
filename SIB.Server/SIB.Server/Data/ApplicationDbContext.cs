@@ -12,19 +12,14 @@ namespace SIB.Server.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            this.SeedRoles(builder);
-            this.SeedOwner(builder);
-            this.SeedArticles(builder);
+            SeedRoles(builder);
+            SeedOwner(builder);
+            SeedSimpleTags(builder);         
         }
 
         public DbSet<Article> Articles { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
-        private void SeedArticles(ModelBuilder builder)
-        {
-            builder.Entity<Article>()
-                .HasOne(p => p.User)
-                .WithMany(p => p.Articles);
-        }
         private void SeedRoles(ModelBuilder builder)
         {
             builder.Entity<IdentityRole>().HasData(
@@ -51,6 +46,7 @@ namespace SIB.Server.Data
                         PasswordHash = hasher.HashPassword(null, "OURPASSWORD")
                     }
             );
+        }
 
             builder.Entity<IdentityUserRole<string>>().HasData(
             new IdentityUserRole<string>
@@ -58,12 +54,14 @@ namespace SIB.Server.Data
                 RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210",
                 UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9"
             });
-
-            //builder.Entity<Article>()
-            //    .HasData(
-            //    new Article { Id = 1, User = Users.First(u => u.Id == "8e445865-a24d-4543-a6c6-9443d048cdb9"), Description = "Seeded Article", DOC = DateTime.Now, Title = "Owner's seeded article", Views = 0 }
-            //);
         }
 
+        private void SeedSimpleTags(ModelBuilder builder)
+        {
+            builder.Entity<Tag>().HasData(
+                new Tag () { Id = 1, Name = "WEB"},
+                new Tag() { Id = 2, Name = "Hardware" }
+            );
+        }
     }
 }

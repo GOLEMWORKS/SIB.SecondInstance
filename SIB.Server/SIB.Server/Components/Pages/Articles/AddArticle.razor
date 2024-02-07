@@ -18,9 +18,20 @@
     </div>
 
     <div class="form-group">
-        <label for="Description">Текст статьи</label>
+        <label for="Description">Краткое описание</label>
         <InputText id="Description" @bind-Value="article.Description" class="form-control"></InputText>
     </div>
+
+    <div class="form-group">
+        <label for="Content">Текст статьи</label>
+        <InputTextArea id="Content" @bind-Value="article.Content" class="form-control"></InputTextArea>
+    </div>
+
+    //Компонент для тэгов!
+    <div class="form-group">
+        <SelectTagsComponent OnSelectedTags="OnSelectedTags"></SelectTagsComponent>
+    </div>
+    
 
     <div class="form-group">
         <label for="Views">Указать просмотры заранее</label>
@@ -31,9 +42,18 @@
         <label for="DOC">Дата создания</label>
         <InputDate id="DOC" @bind-Value="article.DOC" class="form-control" disabled></InputDate>
     </div>
+    <br />
+    <div class="form-group">
+        <label for="Ratio">Видимость статьи: </label><br/>
+        <InputRadioGroup Name="IsVisible" @bind-Value="article.IsVisible" id="Ratio">
+            <InputRadio Name="IsVisible" Value="@true" />Видно для всех <br />
+            <InputRadio Name="IsVisible" Value="@false"/>Видно только для админов <br />
+        </InputRadioGroup>
+    </div>
 
+    <br />
     <button class="btn btn-success" type="submit">
-        submit
+        Подтвердить
     </button>
 
 </EditForm>
@@ -49,6 +69,11 @@
     [SupplyParameterFromForm(FormName = "ArticleForm")]
     public Article? article { get; set;}
 
+    private void OnSelectedTags(List<Tag> tags)
+    {
+        this.article.Tags = tags;
+    }
+
     protected override async Task OnInitializedAsync()
     {
         article = new();
@@ -56,16 +81,15 @@
         var user = (await authenticationState).User;
         if (user.Identity.IsAuthenticated)
         {
-            // var currentUser = await userManager.GetUserAsync(user);
-            article.User = await userManager.GetUserAsync(user);
+            var currentUser = await userManager.GetUserAsync(user);
+            article.Author = currentUser.UserName ?? "nullUser";
         }
         else return;
     }
 
-
     private void OnValidSubmit() 
     {
         _addArticleUseCase.ExecuteAsync(article);
-        navMan.NavigateTo("/");
+        navMan.NavigateTo("/articles");
     }
 }

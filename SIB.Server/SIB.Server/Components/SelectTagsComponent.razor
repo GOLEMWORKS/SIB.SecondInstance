@@ -1,0 +1,35 @@
+﻿@inject IGetAllTagsUseCase _getAllTagsUseCase
+
+<div style="height: 120px; border: 1px solid gray;">
+@if (tags != null && tags.Count > 0)
+{
+    foreach (var tag in tags)
+    {
+        <div>@tag.Name</div>
+    }
+}
+</div>
+@code {
+    [Parameter]
+    public EventCallback<List<Tag>> OnSelectedTags { get; set; }
+
+    public List<Tag> tags { get; set; }
+
+    public List<Tag> selectedTags { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        tags = await _getAllTagsUseCase.ExecuteAsync();
+    }
+
+    private async Task OnSelectedTag(Tag tag)
+    {
+        selectedTags.Add(tag);
+        await OnSelectedTags.InvokeAsync(this.selectedTags);
+    }
+
+    private void RemoveTag(Tag tag)
+    {
+        this.selectedTags.Remove(tag);
+    }
+}

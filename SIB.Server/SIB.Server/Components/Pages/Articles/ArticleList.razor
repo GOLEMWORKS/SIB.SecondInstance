@@ -2,7 +2,51 @@
 
 @attribute [Authorize(Policy = "CreatorPolicy")]
 
+@inject IGetAllArticlesUseCase _getAllArticlesUseCase
+@inject NavigationManager navMan
+
+@rendermode InteractiveServer
+
+<RadzenDataGridRU
+    Data="@articles"
+    TItem="Article"
+    AllowFiltering="true" 
+    FilterMode="FilterMode.Advanced"
+    AllowSorting="true" 
+    AllowPaging="true" 
+    PageSize="10"
+    ShowPagingSummary="true"
+    AllowColumnResize="true">
+
+    <Columns>
+        <RadzenDataGridColumn TItem="Article" Property="Id" Filterable="false" Title="ID" Frozen="true" Width="80px" TextAlign="TextAlign.Center" />
+        <RadzenDataGridColumn TItem="Article" Property="Title" Filterable="true" Title="Наименование" Width="80px" />
+        <RadzenDataGridColumn TItem="Article" Property="Author" Filterable="true" Title="Автор" Width="80px" />
+        <RadzenDataGridColumn TItem="Article" Property="DOC" Filterable="true" Title="Дата создания" Width="80px" />
+        <RadzenDataGridColumn TItem="Article" Property="Description" Filterable="true" Title="Описание" Width="80px" />
+        <RadzenDataGridColumn TItem="Article" Property="IsVisible" Filterable="true" Title="Видимость" Width="80px" />
+    </Columns>
+
+</RadzenDataGridRU> 
+<hr class="my-4">
+<div class="btn-group" role="group">
+    <button type="button" class="btn btn-secondary" @onclick="GoToAdmin">
+        Назад
+    </button>
+    <button type="button" class="btn btn-secondary" @onclick="AddArticlePage">
+        Добавить статью
+    </button>
+</div>
 
 @code {
+    private List<Article>? articles;
 
+    protected override async Task OnInitializedAsync()
+    {
+        articles = await _getAllArticlesUseCase.ExecuteAsync();
+    }
+
+    public void AddArticlePage() => navMan.NavigateTo("/addarticle");
+
+    public void GoToAdmin() => navMan.NavigateTo("/admin");
 }
