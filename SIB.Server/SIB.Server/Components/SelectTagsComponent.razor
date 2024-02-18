@@ -3,10 +3,12 @@
 <div style="height: 120px; border: 1px solid gray;">
 @if (tags != null && tags.Count > 0)
 {
-    foreach (var tag in tags)
-    {
-        <div>@tag.Name</div>
-    }
+    <ul>
+        @foreach (var tag in tags)
+        {
+            <li>@tag.Name</li>
+        }
+    </ul>
 }
 </div>
 @code {
@@ -24,7 +26,6 @@
 
     private async Task OnSelectedTag(Tag tag)
     {
-        selectedTags.Add(tag);
         await OnSelectedTags.InvokeAsync(this.selectedTags);
     }
 
